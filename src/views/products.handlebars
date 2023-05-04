@@ -1,0 +1,29 @@
+<h1>Todos los productos</h1>
+
+<ul>
+	{{#each products.docs}}
+		<li>
+			<a href="/products/{{this.id}}">
+				<h2>{{this.title}}</h2>
+				<p>{{this.description}} <p/>
+                <p>Stock: {{this.stock}}</p>
+				<p>${{this.price}}</p>
+			</a>
+			<form method="POST" action="http://localhost:8080/api/carts/644d9bd2ec8f54b9724acf3c/products/{{this.id}}">
+				<input type="hidden" name="productId" value="{{this.id}}" />
+				<button type="submit">Agregar al carrito</button>
+			</form>
+		</li>
+	{{/each}}
+</ul>
+<a>{{products.page}}</a>
+{{#if products.hasPrevPage}}
+<a href="http://localhost:8080/products?page={{products.prevPage}}">Prev Page</a>
+{{/if}}
+{{#if products.hasNextPage}}
+<a href="http://localhost:8080/products?page={{products.nextPage}}">Next Page</a>
+{{/if}}
+
+{{!-- 
+<script src="./socket.io/socket.io.js"></script> --}}
+{{!-- <script src="../js/product.js"></script> --}}
